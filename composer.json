@@ -1,0 +1,16 @@
+{
+    "name": "Antoine/ginger",
+    "description": "Application Web qui va permettre de récupérer l'association UID de la carte étudiante Icam à son étudiant Icam",
+    "authors": [
+        {
+            "name": "Ithorion",
+            "email": "antoine_giraud2@hotmail.fr"
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    },
+    "autoload": {
+        "psr-4" : {"App\\" : "App"}
+    }
+}
