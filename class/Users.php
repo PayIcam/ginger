@@ -6,10 +6,11 @@ class Users {
         
         $user = $DB->query('SELECT * FROM users WHERE login = :login', array('login'=>$login));
         if (!empty($user) && count($user) == 1) {
+            $user = current($user);
             $user['type']        = "etu";
             $user['is_adulte']   = true;
             $user['is_cotisant'] = true;
-            return current($user);
+            return $user;
         }elseif(!empty($user) && count($user) > 1){
             die('Erreur : plusieurs personnes ont le même email ...');
         }elseif(preg_match('/^[a-z-]+[.]+[a-z-]+@([0-9]{4}[.])?icam[.]fr$/', $login)) {
@@ -44,10 +45,11 @@ class Users {
         
         $user = $DB->query('SELECT * FROM users WHERE badge_uid = :badge_uid', array('badge_uid'=>$badge_uid));
         if (!empty($user) && count($user) == 1) {
+            $user = current($user);
             $user['type']        = "etu";
             $user['is_adulte']   = true;
             $user['is_cotisant'] = true;
-            return current($user);
+            return $user;
         }elseif(!empty($user) && count($user) > 1){
             die('Erreur : plusieurs personnes ont le badge ...');
         }else{
