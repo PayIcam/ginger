@@ -1,10 +1,10 @@
 <?php
 
-require 'vendor/autoload.php';
-use \App\Payicam\Ginger\Config;
-use \App\Payicam\Ginger\Users;
-use \App\Payicam\Ginger\Applications;
+require_once 'class/Config.php';
+require_once 'class/Applications.php';
+require_once 'class/Users.php';
 
+// Initialisation des paraètres de configuration
 require "config.php";
 Config::initFromArray($_CONFIG);
 

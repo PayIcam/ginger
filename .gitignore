@@ -1,3 +1,2 @@
-config.php
-vendor/*
-payicam_ginger.mwb*
+/config.php
+database_creation/payicam_ginger.mwb*

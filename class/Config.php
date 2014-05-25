@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Payicam\Ginger;
-
 class Config {
     protected static $config = array();
     

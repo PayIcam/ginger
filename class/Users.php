@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Payicam\Ginger;
-
 class Users {
     public static function getByLogin($login){
         global $DB;

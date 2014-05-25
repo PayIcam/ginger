@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Payicam\Ginger;
-
 class Applications {
     
     public static function checkApp($app_key){
