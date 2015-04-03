@@ -13,23 +13,31 @@ class Users {
             return $user;
         }elseif(!empty($user) && count($user) > 1){
             die('Erreur : plusieurs personnes ont le même email ...');
-        }elseif(preg_match('/^[a-z-]+[.]+[a-z-]+([.0-9a-z-]+)?@(mgf\.)?([0-9]{4}[.])?icam[.]fr$/', $login)) { // Si l'email n'existe pas déjà, on va le rentrer dans la base...
-            $prenomNomPromoIcamFr = explode('@', $login);
-            $prenomNom = explode('.', $prenomNomPromoIcamFr[0]);
-            $prenom = ucfirst($prenomNom[0]);
-            $nom = ucfirst($prenomNom[1]);
-            $promo = current(explode('.', $prenomNomPromoIcamFr[1]));
+        }elseif(preg_match('/^[a-z-]+[.]+[a-z-]+([.0-9a-z-]+)?@(mgf\.)?([0-9]{4}[.])?icam[.]fr$/', $login)) {
+            // Si l'email n'existe pas déjà, et que c'est un mail "icam" on va le rentrer dans la base...
+            $emailExploded = explode('@', $login);
+                $prenomNom = explode('.', $emailExploded[0]);
+                    $prenom = ucfirst($prenomNom[0]);
+                    $nom = ucfirst($prenomNom[1]);
+                $domaine = explode('.', $emailExploded[1]);
+                    echo $domaine[0]>0;
+                    $promo = ($domaine[0] > 0)?$domaine[0] : (($domaine[1] > 0)?$domaine[1] : 0);
+                            // 2015.icam.fr                   mgf.2015.icam.fr              icam.fr
+                    $filiere = ($domaine[0] > 0)?"Ingenieur":(($domaine[0]=="mgf" )?"Master Génie Ferroviaire" : (($domaine[0]=="icam" )?"Permanant":"Inconu"));
+                            // 2015.icam.fr // mgf.2015.icam.fr // icam.fr // XXX.icam.fr
             $user = array(
                 "login"            => $login,
                 "nom"              => $nom,
                 "prenom"           => $prenom,
                 "mail"             => $login,
+                "promo"            => $promo,
+                "filiere"          => $filiere,
                 "badge_uid"        => null,
                 "expiration_badge" => null
             );
-
-            $insert = $DB->query('INSERT INTO users ( login, nom, prenom, mail, badge_uid, expiration_badge )
-                VALUES ( :login ,:nom ,:prenom ,:mail ,:badge_uid ,:expiration_badge );',
+            
+            $insert = $DB->query('INSERT INTO users ( login, nom, prenom, mail, promo, filiere,  badge_uid, expiration_badge )
+                VALUES ( :login, :nom, :prenom, :mail, :promo, :filiere, :badge_uid, :expiration_badge );',
                 $user);
             $user['type']        = "etu";
             $user['is_adulte']   = true;
