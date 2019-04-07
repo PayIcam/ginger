@@ -23,7 +23,7 @@ class Users {
                     echo $domaine[0]>0;
                     $promo = ($domaine[0] > 0)?$domaine[0] : (($domaine[1] > 0)?$domaine[1] : 0);
                             // 2015.icam.fr                   mgf.2015.icam.fr              icam.fr
-                    $filiere = ($domaine[0] > 0)?"Ingenieur":(($domaine[0]=="icam" )?"Permanent":"Inconnu"));
+                    $filiere = ($domaine[0] > 0)?"Ingenieur":(($domaine[0]=="icam" )?"Permanent":"Inconnu");
                             // 2015.icam.fr // icam.fr // XXX.icam.fr
             $user = array(
                 "login"            => $login,
