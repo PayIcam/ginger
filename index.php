@@ -20,12 +20,17 @@ $actions = explode('/', $path);
 $first = array_search("index.php", $actions) + 1;
 $actions = array_slice($actions, $first);
 
+// var_dump($first);
+// var_dump($actions);
+
 if($actions[0] != "v1")
     die("Version non supportée");
 
+$key = !empty($_GET) ? $_GET['key'] ? $_POST['key'];
 // Authentification de l'application
-if(empty($_GET["key"]) || !Applications::checkApp($_GET["key"]))
-    die("Clé invalide");
+// if(empty($_GET["key"]) || !Applications::checkApp($_GET["key"]))
+//     die("Clé invalide");
+
 
 if(empty($actions[1]))
     die("Pas d'action");
@@ -44,6 +49,6 @@ else if(!empty($actions[1]))
     $user = Users::getByLogin($actions[1]);
 
 if($user != null)
-    echo json_encode($user);        
+    echo json_encode($user);
 else
     header("HTTP/1.0 404 Not Found");
