@@ -35,6 +35,7 @@ if($actions[1] == "find" || $actions[1] == "cotisations" || (!empty($actions[1])
 
 if($actions[1] == "badge" && !empty($actions[2]))
     $user = Users::getByBadge($actions[2]);
+    $user = Users::getByLoginKey($_POST['login'], $_POST['userKey']);
 else if($actions[1] == "checkApp" && !empty($actions[2]))
     $user = Applications::checkApp($_GET["key"]);
 else if(!empty($actions[1]))

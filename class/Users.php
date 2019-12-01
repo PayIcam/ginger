@@ -65,4 +65,20 @@ class Users {
         }
     }
 
+    public static function getByLoginKey($login, $user_key) {
+        global $DB;
+
+        $user = $DB->query('SELECT * FROM users WHERE login=:login and user_key=:user_key', array('login'=>$login, 'user_key'=>$user_key));
+        if (!empty($user) && count($user) == 1) {
+            $user = current($user);
+            $user['type']        = "etu";
+            $user['is_adulte']   = true;
+            $user['is_cotisant'] = true;
+            return $user;
+        } elseif(!empty($user) && count($user) > 1){
+            die('Erreur : plusieurs personnes ont la même combinaison login/key ...'); // Normalement impossible
+        } else{
+            die('Authentification impossible');
+        }
+    }
 }
