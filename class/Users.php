@@ -13,7 +13,7 @@ class Users {
             return $user;
         }elseif(!empty($user) && count($user) > 1){
             die('Erreur : plusieurs personnes ont le même email ...');
-        }elseif(preg_match('/^[a-z-]+[.]+[a-z-]+([.0-9a-z-]+)?@(mgf\.)?([0-9]{4}[.])?icam[.]fr$/', $login)) {
+        }elseif(preg_match('/^[a-z-]+[.]+[a-z-]+([.0-9a-z-]+)?@(mgf\.|)?([0-9]{4}[.])?(ucac\-)?icam\.(fr|com)$/', $login)) {
             // Si l'email n'existe pas déjà, et que c'est un mail "icam" on va le rentrer dans la base...
             $emailExploded = explode('@', $login);
                 $prenomNom = explode('.', $emailExploded[0]);
