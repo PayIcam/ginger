@@ -51,7 +51,7 @@ class Users {
     public static function getByBadge($badge_uid){
         global $DB;
 
-        $user = $DB->query('SELECT * FROM users WHERE badge_uid = :badge_uid', array('badge_uid'=>$badge_uid));
+        $user = $DB->query('SELECT * FROM users WHERE badge_uid LIKE :badge_uid', array('badge_uid'=>'%'.$badge_uid.'%'));
         if (!empty($user) && count($user) == 1) {
             $user = current($user);
             $user['type']        = "etu";
