@@ -20,9 +20,6 @@ $actions = explode('/', $path);
 $first = array_search("index.php", $actions) + 1;
 $actions = array_slice($actions, $first);
 
-// var_dump($first);
-// var_dump($actions);
-
 if($actions[0] != "v1")
     die("Version non supportée");
 
