@@ -26,11 +26,15 @@ $actions = array_slice($actions, $first);
 if($actions[0] != "v1")
     die("Version non supportée");
 
-$key = $_GET['key'] ?? $_POST['key'];
 // Authentification de l'application
-// if(empty($_GET["key"]) || !Applications::checkApp($_GET["key"]))
-//     die("Clé invalide");
-
+if(empty($_GET['key']) && empty($_POST['key'])) {
+    die("Pas de clé envoyée");
+} else {
+    $key = $_GET['key'] ?? $_POST['key'];
+    if(!Applications::checkApp($key)) {
+        die("Clé invalide");
+    }
+}
 
 if(empty($actions[1]))
     die("Pas d'action");
